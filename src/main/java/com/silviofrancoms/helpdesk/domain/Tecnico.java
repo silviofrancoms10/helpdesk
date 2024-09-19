@@ -1,17 +1,26 @@
 package com.silviofrancoms.helpdesk.domain;
 
+import com.silviofrancoms.helpdesk.domain.enums.Perfil;
+import jakarta.persistence.Entity;
+import jakarta.persistence.OneToMany;
+
 import java.util.ArrayList;
 import java.util.List;
 
+@Entity
 public class Tecnico extends Pessoa {
+    private static final long serialVersionUID = 1L;
+    @OneToMany(mappedBy = "tecnico")
     private List<Chamado> chamados = new ArrayList<>();
 
     public Tecnico() {
         super();
+        addPerfil(Perfil.CLIENTE);
     }
 
     public Tecnico(Integer id, String name, String cpf, String email, String password) {
         super(id, name, cpf, email, password);
+        addPerfil(Perfil.CLIENTE);
     }
 
     public List<Chamado> getChamados() {
