@@ -30,7 +30,7 @@ public class Chamado implements Serializable {
     @JoinColumn(name = "cliente_id")
     private Cliente cliente;
 
-    public Chamado(){
+    public Chamado() {
         super();
     }
 
