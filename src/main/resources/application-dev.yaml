@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: helpdesk
+  datasource:
+    url: jdbc:mysql://localhost:3306/helpdesk?allowPublicKeyRetrieval=true&useSSL=false
+    username: silvio
+    password: 123456
+  jpa:
+    hibernate:
+      ddl-auto: none
+    open-in-view: false
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.MySQLDialect
