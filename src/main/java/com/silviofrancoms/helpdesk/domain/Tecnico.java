@@ -7,6 +7,7 @@ import jakarta.persistence.OneToMany;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Entity
 public class Tecnico extends Pessoa {
@@ -23,6 +24,16 @@ public class Tecnico extends Pessoa {
     public Tecnico(Integer id, String name, String cpf, String email, String password) {
         super(id, name, cpf, email, password);
         addPerfil(Perfil.CLIENTE);
+    }
+
+    public Tecnico(TecnicoDTO obj) {
+        this.id = obj.getId();
+        this.name = obj.getName();
+        this.cpf = obj.getCpf();
+        this.email = obj.getEmail();
+        this.password = obj.getPassword();
+        this.perfis = obj.getPerfis().stream().map(Perfil::getCode).collect(Collectors.toSet());
+        this.dataCriacao = obj.getDataCriacao();
     }
 
     public List<Chamado> getChamados() {

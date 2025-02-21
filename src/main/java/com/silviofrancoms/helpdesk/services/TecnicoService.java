@@ -1,6 +1,7 @@
 package com.silviofrancoms.helpdesk.services;
 
 import com.silviofrancoms.helpdesk.domain.Tecnico;
+import com.silviofrancoms.helpdesk.domain.TecnicoDTO;
 import com.silviofrancoms.helpdesk.repositories.TecnicoRepository;
 import com.silviofrancoms.helpdesk.services.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,5 +23,10 @@ public class TecnicoService {
 
     public List<Tecnico> findAll() {
         return tecnicoRepository.findAll();
+    }
+
+    public Tecnico create(TecnicoDTO objDTO) {
+        objDTO.setId(null);
+        return tecnicoRepository.save(new Tecnico(objDTO));
     }
 }
