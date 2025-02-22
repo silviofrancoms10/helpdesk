@@ -2,6 +2,7 @@ package com.silviofrancoms.helpdesk.domain;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.silviofrancoms.helpdesk.domain.enums.Perfil;
+import jakarta.validation.constraints.NotNull;
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -15,9 +16,13 @@ public class TecnicoDTO implements Serializable {
     private static final long serialVersionUID = 1L;
 
     protected Integer id;
+    @NotNull(message = "O campo NAME é requerido")
     protected String name;
+    @NotNull(message = "O campo CPF é requerido")
     protected String cpf;
+    @NotNull(message = "O campo EMAIL é requerido")
     protected String email;
+    @NotNull(message = "O campo PASSWORD é requerido")
     protected String password;
     protected Set<Integer> perfis = new HashSet<>();
 
