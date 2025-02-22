@@ -3,6 +3,7 @@ package com.silviofrancoms.helpdesk.domain;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.silviofrancoms.helpdesk.domain.enums.Perfil;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.OneToMany;
 
 import java.util.ArrayList;
@@ -13,7 +14,7 @@ import java.util.stream.Collectors;
 public class Tecnico extends Pessoa {
     private static final long serialVersionUID = 1L;
     @JsonIgnore
-    @OneToMany(mappedBy = "tecnico")
+    @OneToMany(mappedBy = "tecnico", fetch = FetchType.EAGER)
     private List<Chamado> chamados = new ArrayList<>();
 
     public Tecnico() {

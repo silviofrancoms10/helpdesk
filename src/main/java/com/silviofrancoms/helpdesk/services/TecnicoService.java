@@ -24,7 +24,7 @@ public class TecnicoService {
 
     public Tecnico findById(Integer id) {
         Optional<Tecnico> obj = tecnicoRepository.findById(id);
-        return obj.orElseThrow(()-> new ObjectNotFoundException("Objeto não encontrado! Id: " + id ));
+        return obj.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado! Id: " + id));
     }
 
     public List<Tecnico> findAll() {
@@ -45,13 +45,22 @@ public class TecnicoService {
         return tecnicoRepository.save(oldObj);
     }
 
+    public void delete(Integer id) {
+        Tecnico obj = findById(id);
+        if (obj.getChamados().size() > 0) {
+            throw new DataIntegrityViolationException("Técnico possui chamados e não pode ser deletado!");
+        } else {
+            tecnicoRepository.deleteById(id);
+        }
+    }
+
     private void validaPorCpfEEmail(TecnicoDTO objDTO) {
         Optional<Pessoa> obj = pessoaRepository.findByCpf(objDTO.getCpf());
-        if(obj.isPresent() && obj.get().getId() != objDTO.getId()) {
+        if (obj.isPresent() && obj.get().getId() != objDTO.getId()) {
             throw new DataIntegrityViolationException("CPF já cadastrado na base de dados!");
         }
         obj = pessoaRepository.findByEmail(objDTO.getEmail());
-        if(obj.isPresent() && obj.get().getId() != objDTO.getId()) {
+        if (obj.isPresent() && obj.get().getId() != objDTO.getId()) {
             throw new DataIntegrityViolationException("E-mail já cadastrado na base de dados!");
         }
     }
