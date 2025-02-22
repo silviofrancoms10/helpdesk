@@ -7,6 +7,7 @@ import com.silviofrancoms.helpdesk.repositories.PessoaRepository;
 import com.silviofrancoms.helpdesk.repositories.TecnicoRepository;
 import com.silviofrancoms.helpdesk.services.exceptions.DataIntegrityViolationException;
 import com.silviofrancoms.helpdesk.services.exceptions.ObjectNotFoundException;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -34,6 +35,14 @@ public class TecnicoService {
         objDTO.setId(null);
         validaPorCpfEEmail(objDTO);
         return tecnicoRepository.save(new Tecnico(objDTO));
+    }
+
+    public Tecnico update(Integer id, @Valid TecnicoDTO objDTO) {
+        objDTO.setId(id);
+        Tecnico oldObj = findById(id);
+        validaPorCpfEEmail(objDTO);
+        oldObj = new Tecnico(objDTO);
+        return tecnicoRepository.save(oldObj);
     }
 
     private void validaPorCpfEEmail(TecnicoDTO objDTO) {
