@@ -7,12 +7,14 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.OneToMany;
 
+import java.io.Serial;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Entity
 public class Tecnico extends Pessoa {
+    @Serial
     private static final long serialVersionUID = 1L;
     @JsonIgnore
     @OneToMany(mappedBy = "tecnico", fetch = FetchType.EAGER)
