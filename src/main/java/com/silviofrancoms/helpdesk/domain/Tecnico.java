@@ -1,6 +1,7 @@
 package com.silviofrancoms.helpdesk.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.silviofrancoms.helpdesk.domain.dtos.TecnicoDTO;
 import com.silviofrancoms.helpdesk.domain.enums.Perfil;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;

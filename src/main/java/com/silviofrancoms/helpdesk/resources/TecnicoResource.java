@@ -1,7 +1,7 @@
 package com.silviofrancoms.helpdesk.resources;
 
 import com.silviofrancoms.helpdesk.domain.Tecnico;
-import com.silviofrancoms.helpdesk.domain.TecnicoDTO;
+import com.silviofrancoms.helpdesk.domain.dtos.TecnicoDTO;
 import com.silviofrancoms.helpdesk.services.TecnicoService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +11,6 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(value = "/tecnicos")
