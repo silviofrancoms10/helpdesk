@@ -3,13 +3,13 @@ package com.silviofrancoms.helpdesk.resources;
 import com.silviofrancoms.helpdesk.domain.Chamado;
 import com.silviofrancoms.helpdesk.domain.dtos.ChamadoDTO;
 import com.silviofrancoms.helpdesk.services.ChamadoService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -30,6 +30,13 @@ public class ChamadoResource {
         List<Chamado> list = chamadoService.findAll();
         List<ChamadoDTO> listDTO = list.stream().map(ChamadoDTO::new).toList();
         return ResponseEntity.ok().body(listDTO);
+    }
+
+    @PostMapping
+    public ResponseEntity<ChamadoDTO> create(@Valid @RequestBody ChamadoDTO objDTO) {
+        Chamado newObj = chamadoService.create(objDTO);
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(newObj.getId()).toUri();
+        return ResponseEntity.created(uri).build();
     }
 
 }
